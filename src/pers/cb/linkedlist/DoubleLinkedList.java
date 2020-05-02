@@ -9,12 +9,13 @@ public class DoubleLinkedList {
 		DoubleLink doublelink = new DoubleLink();
 		doublelink.add(hero1);
 		doublelink.add(hero2);
-		doublelink.add(hero3);
+		//doublelink.add(hero3);
 		doublelink.add(hero4);
 		doublelink.list();
 		//doublelink.delete(2);
-		HeroNode2 hero22 = new HeroNode2(2, "风格", "证券");
-		doublelink.update(hero22);
+//		HeroNode2 hero22 = new HeroNode2(2, "风格", "证券");
+//		doublelink.update(hero22);
+		doublelink.add2(hero3);
 		doublelink.list();
 		
 	}
@@ -88,6 +89,34 @@ class DoubleLink{
 			temp.nickname = newheroNode.nickname;
 		}else{
 			System.out.println("未找到该节点" + newheroNode.no);
+		}
+	}
+	//根据序号添加
+	public void add2(HeroNode2 heroNode){
+		HeroNode2 temp = head2.next;//如果链表为空，temp就是修改head节点
+		boolean flag = false;//标志添加的编号是否存在，默认为false
+		//遍历链表，找到最后
+		while(true){
+			if(temp == null){//说明temp已经在最后
+				break;
+			}
+			if(temp.no > heroNode.no){//找到位置，直接插入
+				break;
+			}else if(temp.no == heroNode.no){
+				//编号已经存在
+				flag = true;
+				break;
+			}
+			temp = temp.next;//后移，继续找
+		}
+		if(flag){
+			System.out.println("不能添加，编号已存在" + heroNode.no);
+		}else{
+			//加入数据
+			heroNode.next = temp;
+			heroNode.pre = temp.pre;
+			temp.pre.next = heroNode;
+			
 		}
 	}
 	//默认添加到尾端的添加
